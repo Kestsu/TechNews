@@ -5,7 +5,6 @@ from parsel import Selector
 
 # Requisito 1
 def fetch(url):
-    """Seu código deve vir aqui"""
     headers = {"user-agent": "Fake user-agent"}
     try:
         time.sleep(1)
@@ -19,13 +18,8 @@ def fetch(url):
 
 # Requisito 2
 def scrape_updates(html_content):
-    res = fetch(html_content)
-    selec = Selector(res)
-    result = []
-    a = "article > div > div:nth-child(1) > div > div > a ::attr(href)"
-    for links in selec.css(a).getall():
-        result.append(links)
-    return result
+    a = "div.post-inner > div.entry-thumbnail > div > a ::attr(href)"
+    return Selector(html_content).css(a).getall()
 
 
 # Requisito 3
