@@ -18,13 +18,14 @@ def fetch(url):
 
 # Requisito 2
 def scrape_updates(html_content):
-    a = "div.post-inner > div.entry-thumbnail > div > a ::attr(href)"
-    return Selector(html_content).css(a).getall()
+    links = "div.post-inner > div.entry-thumbnail > div > a ::attr(href)"
+    return Selector(html_content).css(links).getall()
 
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    next_link = "nav > div > a.next.page-numbers ::attr(href)"
+    return Selector(html_content).css(next_link).get()
 
 
 # Requisito 4
