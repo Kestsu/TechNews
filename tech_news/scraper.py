@@ -1,6 +1,8 @@
 import requests
 import time
 from parsel import Selector
+import math
+from tech_news.database import create_news
 
 
 # Requisito 1
@@ -36,8 +38,8 @@ def scrape_news(html_content):
     timestamp = Selector(html_content).css("ul > li.meta-date ::text").get()
     writer_schema = "li.meta-author > span.author > a ::text"
     writer = Selector(html_content).css(writer_schema).get()
-    #  Vai pegar so o primeiro elemento
     time_schema = "li.meta-reading-time ::text"
+    #  Vai pegar so o primeiro elemento/ No caso so quero o numero
     time = Selector(html_content).css(time_schema).get().split()[0]
     summary_schema = "div.entry-content > p:nth-child(1) ::text"
     summary = ''.join(Selector(html_content).css(summary_schema).getall())
@@ -59,4 +61,21 @@ def scrape_news(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    """Seu código deve vir aqui"""
+    res = fetch("https://blog.betrybe.com/")
+    pages_need = 1
+    links = []
+    info_pages = []
+    if amount > 12:
+        pages_need = math.ceil(amount / 12)
+    for quantity in range(pages_need):
+        links.extend(scrape_updates(res))
+        res = fetch(scrape_next_page_link(res))
+    for url in links:
+        info_pages.append(scrape_news(fetch(url)))
+    create_news(info_pages[:amount])
+    return info_pages[:amount]
+
+
+if __name__ == "__main__":
+    amount = input("Digite um numero: ")
+    get_tech_news(int(amount))
