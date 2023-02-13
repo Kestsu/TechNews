@@ -82,35 +82,30 @@ def get_tech_news(amount):
 
 
 # def get_tech(amount):
-#     quantify_notices = [amount]
-#     primary_page = fetch('https://blog.betrybe.com/')
-#     # next_page = scrape_next_page_link(primary_page)
-#     # updates = scrape_updates(fetch(next_page))
-#     # print(next_page)
-#     notices_list = []
-#     quantify = 0
-#     for notices in quantify_notices:
-#         if quantify_notices[0] > quantify:
-#             final_count = 0
-#             final_count += 1
-#             if final_count == 1:
-#                 notices_length = scrape_updates(primary_page)
-#                 notices_list += notices_length
-#                 quantify += len(notices_length)
-#             pages = scrape_next_page_link(
-#                 fetch(f"""https://blog.betrybe.com/page/{notices + 1}/"""))
-#             notices_length = scrape_updates(fetch(pages))
-#             notices_list += notices_length
-#             quantify += len(notices_length)
-#             # print('a', quantify)
-#     list_links = notices_list[:quantify_notices[0]]
+#     count_notices = 0
+#     next_count = 0
 #     list_dict = []
-#     for links in list_links:
-#         list_dict.append(scrape_news(fetch(links)))
-#     # print(list_dict)
-#     # create_news(list_dict)
-#     # print(len(list_dict))
-#     return list_dict
+#     # while amount < count_notices:
+#     html_content = fetch("https://blog.betrybe.com/")
+#     page_notices = scrape_updates(html_content)
+#     count_notices += len(page_notices)
+#     next_page = scrape_next_page_link(html_content)
+#     for index in range(0, amount):
+#         if index <= 11:
+#             dict_notices = scrape_news(fetch(page_notices[index]))
+#             list_dict.append(dict_notices)
+#         if index >= 12:
+#             if next_count >= 12:
+#                 next_count = 0
+#             next_html = fetch(next_page)
+#             next_notices = scrape_updates(next_html)
+#             dict_notices = scrape_news(fetch(next_notices[next_count]))
+#             list_dict.append(dict_notices)
+#             next_count += 1
+
+#     # print(len(list_dict[:amount]))
+#     # create_news(list_dict[:amount])
+#     return list_dict[:amount]
 
 
 # if __name__ == '__main__':
