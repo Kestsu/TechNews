@@ -1,4 +1,3 @@
-# import dateutil.parser
 from tech_news.database import search_news
 from tech_news.scraper import get_tech_news
 from datetime import datetime
@@ -13,18 +12,8 @@ def search_by_title(title):  # N sei pq ta falhando
 
     return list_tuple
 
-# inputs = [
-#             "21-12-1980",
-#             "2001-02-31",
-#             "2020-31-02",
-#             "1988-14-25",
-#             "1997-02-31",
-#         ]
-
 
 # Requisito 8
-
-
 def search_by_date(data):
     try:
         data_formatada = datetime.strptime(
@@ -46,7 +35,6 @@ def search_by_category(category):
     for dic in list_all:
         list_tuple.append((dic["title"], dic["url"]))
     return list_tuple
-    # return category
 
 
 def popular_banco(date):
