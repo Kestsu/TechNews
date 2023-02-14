@@ -1,7 +1,37 @@
+import sys
 from tech_news.scraper import get_tech_news
 from tech_news.analyzer.search_engine import search_by_title, search_by_date
 from tech_news.analyzer.search_engine import search_by_category
 from tech_news.analyzer.ratings import top_5_categories
+
+
+def zero():
+    result = input("Digite quantas notícias serão buscadas:")
+    get_tech_news(int(result))
+
+
+def one():
+    result = input("Digite o título:")
+    print(search_by_title(result))
+
+
+def two():
+    result = input("Digite a data no formato aaaa-mm-dd:")
+    print(search_by_date(result))
+
+
+def three():
+    result = input("Digite a categoria:")
+    print(search_by_category(result))
+
+
+def four():
+    print(top_5_categories())
+
+
+def five():
+    print("Encerrando script")
+    return
 
 
 # Requisitos 11 e 12
@@ -14,21 +44,17 @@ def analyzer_menu():
         " 3 - Buscar notícias por categoria;\n"
         " 4 - Listar top 5 categorias;\n"
         " 5 - Sair."
-        )
-    if response == "0":
-        result = input("Digite quantas notícias serão buscadas:")
-        get_tech_news(int(result))
-    if response == "1":
-        result = input("Digite o título:")
-        print(search_by_title(result))
-    if response == "2":
-        result = input("Digite a data no formato aaaa-mm-dd:")
-        print(search_by_date(result))
-    if response == "3":
-        result = input("Digite a categoria:")
-        print(search_by_category(result))
-    if response == "4":
-        print(top_5_categories())
-    if response == "5":
-        print("Encerrando script")
-        return
+    )
+    try:
+        dict_options = {
+            "0": zero,
+            "1": one,
+            "2": two,
+            "3": three,
+            "4": four,
+            "5": five,
+        }
+        dict_options[response]()
+    except (ValueError, KeyError):
+        print("Opção inválida", file=sys.stderr)
+        # sys.stderr.write("Opção inválida") #  Faz a mesma coisa da linha 59
