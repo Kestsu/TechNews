@@ -30,4 +30,4 @@ mock = [
 
 
 def test_reading_plan_group_news():
-    pass
+    print(ReadingPlanService.group_news_for_available_time(10))
