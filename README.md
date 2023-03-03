@@ -1,13 +1,75 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# TechNews: Um exemplo de raspagem de dados!
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+#### Site raspado:
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+https://blog.betrybe.com/
+
+## Conhecimento envolvido: 
+
+- Python
+- Crawlers + POO
+- MongoDB
+- Docker
+
+## Execução da aplicação localmente
+
+
+1. Crie o ambiente virtual para o projeto.
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+```
+
+2. Instale as dependências.
+
+```bash
+python3 -m pip install -r dev-requirements.txt
+```
+
+3. Rode o docker.
+
+```bash
+docker-compose up -d
+```
+
+4. Para abrir o menu, acesse o terminal e execute o comando abaixo.
+
+```bash
+tech-news-analyzer
+```
+
+
+## Buscar notícias por:
+
+### Título:
+
+```bash
+conheça os 10 melhores
+```
+```bash
+firewall
+```
+
+### Data:
+
+```bash
+2023-02-27
+```
+
+### Categoria:
+
+```bash
+Tecnologia
+```
+
+## Caso não tenha o docker instalado, acesse:
+
+Para linux:
+https://docs.docker.com/engine/install/ubuntu/
+
+Para Mac:
+https://www.docker.com/
+
+## Caso não tenha o MongoDB instalado, acesse:
+
+https://www.mongodb.com/
