@@ -58,3 +58,6 @@ def analyzer_menu():
     except (ValueError, KeyError):
         print("Opção inválida", file=sys.stderr)
         # sys.stderr.write("Opção inválida") #  Faz a mesma coisa da linha 59
+    if dict_options["5"]:
+        return
+    return analyzer_menu()
