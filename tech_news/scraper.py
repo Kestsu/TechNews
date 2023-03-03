@@ -5,7 +5,6 @@ import math
 from tech_news.database import create_news
 
 
-# Requisito 1
 def fetch(url):
     headers = {"user-agent": "Fake user-agent"}
     try:
@@ -18,19 +17,16 @@ def fetch(url):
         return None
 
 
-# Requisito 2
 def scrape_updates(html_content):
     links = "div.post-inner > div.entry-thumbnail > div > a ::attr(href)"
     return Selector(html_content).css(links).getall()
 
 
-# Requisito 3
 def scrape_next_page_link(html_content):
     next_link = "nav > div > a.next.page-numbers ::attr(href)"
     return Selector(html_content).css(next_link).get()
 
 
-# Requisito 4
 def scrape_news(html_content):
     url_schema = "head > link[rel = canonical] ::attr(href)"
     url = Selector(html_content).css(url_schema).get()
@@ -39,7 +35,6 @@ def scrape_news(html_content):
     writer_schema = "li.meta-author > span.author > a ::text"
     writer = Selector(html_content).css(writer_schema).get()
     time_schema = "li.meta-reading-time ::text"
-    #  Vai pegar so o primeiro elemento/ No caso so quero o numero
     time = Selector(html_content).css(time_schema).get().split()[0]
     summary_schema = "div.entry-content > p:nth-child(1) ::text"
     summary = ''.join(Selector(html_content).css(summary_schema).getall())
@@ -50,7 +45,7 @@ def scrape_news(html_content):
     category = Selector(html_content).css(category_sch).get()
     return {
         "url": url,
-        "title": title.strip(),  # remover espaço do final
+        "title": title.strip(),
         "timestamp": timestamp,
         "writer": writer,
         "reading_time": int(time),
@@ -59,7 +54,6 @@ def scrape_news(html_content):
     }
 
 
-# Requisito 5
 def get_tech_news(amount):
     res = fetch("https://blog.betrybe.com/")
     pages_need = 1

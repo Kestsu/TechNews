@@ -3,8 +3,7 @@ from tech_news.scraper import get_tech_news
 from datetime import datetime
 
 
-# Requisito 7
-def search_by_title(title):  # N sei pq ta falhando
+def search_by_title(title): 
     list_all = search_news({"title": {"$regex": title.lower()}})
     list_tuple = []
     for dic in list_all:
@@ -13,7 +12,6 @@ def search_by_title(title):  # N sei pq ta falhando
     return list_tuple
 
 
-# Requisito 8
 def search_by_date(data):
     try:
         data_formatada = datetime.strptime(
@@ -27,7 +25,6 @@ def search_by_date(data):
         raise ValueError("Data inválida")
 
 
-# Requisito 9
 def search_by_category(category):
 
     list_all = search_news({"category": category.lower().title()})
