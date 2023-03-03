@@ -34,7 +34,6 @@ def five():
     return
 
 
-# Requisitos 11 e 12
 def analyzer_menu():
     response = input(
         "Selecione uma das opções a seguir:\n"
@@ -43,7 +42,8 @@ def analyzer_menu():
         " 2 - Buscar notícias por data;\n"
         " 3 - Buscar notícias por categoria;\n"
         " 4 - Listar top 5 categorias;\n"
-        " 5 - Sair."
+        " 5 - Sair.\n"
+        " "
     )
     try:
         dict_options = {
@@ -58,3 +58,6 @@ def analyzer_menu():
     except (ValueError, KeyError):
         print("Opção inválida", file=sys.stderr)
         # sys.stderr.write("Opção inválida") #  Faz a mesma coisa da linha 59
+    if dict_options["5"]:
+        return
+    return analyzer_menu()
