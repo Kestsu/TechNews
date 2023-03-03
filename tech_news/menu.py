@@ -8,26 +8,26 @@ from tech_news.analyzer.ratings import top_5_categories
 def zero():
     result = input("Digite quantas notícias serão buscadas:")
     get_tech_news(int(result))
-
+    return analyzer_menu()
 
 def one():
     result = input("Digite o título:")
     print(search_by_title(result))
-
+    return analyzer_menu()
 
 def two():
     result = input("Digite a data no formato aaaa-mm-dd:")
     print(search_by_date(result))
-
+    return analyzer_menu()
 
 def three():
     result = input("Digite a categoria:")
     print(search_by_category(result))
-
+    return analyzer_menu()
 
 def four():
     print(top_5_categories())
-
+    return analyzer_menu()
 
 def five():
     print("Encerrando script")
@@ -60,4 +60,3 @@ def analyzer_menu():
         # sys.stderr.write("Opção inválida") #  Faz a mesma coisa da linha 59
     if dict_options["5"]:
         return
-    return analyzer_menu()
