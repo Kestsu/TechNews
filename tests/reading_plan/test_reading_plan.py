@@ -1,33 +1,45 @@
-from tech_news.analyzer.reading_plan import ReadingPlanService  # noqa: F401, E261, E501
+from unittest.mock import patch
+from tech_news.analyzer.reading_plan import (
+    ReadingPlanService,
+)  # noqa: F401, E261, E501
+from tech_news.database import find_news
 
-
-mock = [
-  {
-    "_id": {
-      "$oid": "63e6d325b33b82cc86e13cde"
-    },
-    "url": "https://blog.betrybe.com/novidades/noticia-bacana",
-    "title": "Notícia bacana",
-    "writer": "Eu",
-    "summary": "Algo muito bacana aconteceu",
-    "reading_time": 4,
-    "timestamp": "04/04/2021",
-    "category": "Ferramentas"
-  },
-  {
-    "_id": {
-      "$oid": "63eab380d0533ae4d961b6ba"
-      },
-    "url": "https://blog.betrybe.com/novidades/noticia_3.htm",
-    "title": "noticia_3",
-    "timestamp": "23/11/2020",
-    "writer": "Escritor_3",
-    "reading_time": 1,
-    "summary": "Sumario da noticia_3",
-    "category": "Ferramentas"
-  }
+mock_data = [
+    {"title": "noticia_0", "reading_time": 2},
+    {"title": "Notícia bacana", "reading_time": 4},
+    {"title": "Notícia bacana 2", "reading_time": 1},
+    {"title": "noticia_3", "reading_time": 1},
+    {"title": "noticia_4", "reading_time": 1},
 ]
+
+response = {
+    "readable": [
+        {"unfilled_time": 1, "chosen_news": [("noticia_0", 2)]},
+        {
+            "unfilled_time": 1,
+            "chosen_news": [("Notícia bacana 2", 1), ("noticia_3", 1)],
+        },
+        {"unfilled_time": 2, "chosen_news": [("noticia_4", 1)]},
+    ],
+    "unreadable": [("Notícia bacana", 4)],
+}
 
 
 def test_reading_plan_group_news():
-    print(ReadingPlanService.group_news_for_available_time(10))
+    with patch.object(
+        ReadingPlanService.group_news_for_available_time, "cls._db_news_proxy",
+            return_value=mock_data
+    ) as mocked:
+        result = ReadingPlanService.group_news_for_available_time(3)
+
+    mocked.assert_awaited_with(3)
+    assert result == response
+
+
+def test_pegar_mock():
+    a = [
+        {"title": news["title"], "reading_time": news["reading_time"]}
+        for news in find_news()
+    ]
+    print(a[:5])
+    assert "" == ""
